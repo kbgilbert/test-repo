@@ -3,7 +3,6 @@
 use strict;
 use warnings;
 use Getopt::Std;
-use vars qw/ $opt_b $opt_o /;
 
 my @script_info = "
 ##########################################################################################
@@ -19,10 +18,9 @@ my @script_info = "
     -b\t.bam file
     -o\toutput file\n\n";
 
-getopts('b:o:');
+my (%opt, $bam, $outfile);
+getopts('b:o:', \%opt);
 &var_check();
-
-my ($bam, $outfile);
 
 open (BAM, $bam) || die "Cannot open $bam: $!\n\n";
 open (OUT, ">$outfile") || die "Cannot open outfile: $outfile: $!\n\n";
@@ -48,24 +46,19 @@ close OUT;
 exit;
 
 sub var_check {
-    if ($opt_b) {
-            $bam = $opt_b;
-    } else {
-            &var_error();
-    }
-    if ($opt_o) {
-            $outfile = $opt_o;
-    } else {
-            &var_error();
-    }
+	if ($opt{'b'}) {
+		$bam = $opt{'b'};
+	} else {
+		&var_error();
+	}
+	if ($opt{'o'}) {
+		$outfile = $opt{'o'};
+	} else {
+		&var_error();
+	}
 }
 
 sub var_error {
 	print "@script_info";
 	exit 0;
 }
-
-
-
-
-exit;
