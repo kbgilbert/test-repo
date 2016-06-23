@@ -25,7 +25,7 @@ getopts('b:o:', \%opt);
 open (BAM, $bam) || die "Cannot open $bam: $!\n\n";
 open (OUT, ">$outfile") || die "Cannot open outfile: $outfile: $!\n\n";
 
-open BAM, "samtools view $bam |";
+open BAM, "samtools view -f 4 $bam |";
 while (my $line = <BAM>) {
 	chomp $line;
 	
