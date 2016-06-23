@@ -30,8 +30,7 @@ while (my $line = <BAM>) {
 	chomp $line;
 	
 	my @split = split(/\t/, $line);
-	my $hit = $split[1];
-	next if ($hit != 4);
+
 	my $name = $split[0];
 	my $seq = $split[9];
 	my $qual = $split[10];
